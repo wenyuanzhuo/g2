@@ -6,19 +6,30 @@
 // }
 // console.log(fn(1))
 
-// var h = []
-// var p = []
+// h = hash
+var h = []
+var p = []
 
 
 function dosomething(position) {
-    for (var i = 0; i < 6; i++) {
-        if (h[i] !== 1 && position < 6) {
+    if (position === 4) {
+        console.log(p)
+        controller({ p: p })
+        return
+    }
+    for (var i = 1; i <= 3; i++) {
+        if (h[i] !== 1 && position < 4) {
             h[i] = 1
-        } else {
             p[position] = i;
             dosomething(position + 1)
+            // p[position] = 0
+            h[i] = 0
         }
     }
 }
 
-dosomething(0)
+function controller(opts) {
+    var  p = opts.p
+}
+
+dosomething(1)
