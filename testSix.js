@@ -9,6 +9,7 @@ console.log(fn(1))
 var h = []
 var p = []
 
+
 function dosomething(position) {
     for (var i = 0; i < 6; i++) {
         if (h[i] !== 1 && position < 6) {
