@@ -1,13 +1,13 @@
-function fn(n) {
-    if(n > 9) {
-      return n
-    }
-    return n + fn(n+1)
-}
-console.log(fn(1))
+// function fn(n) {
+//     if(n > 9) {
+//       return n
+//     }
+//     return n + fn(n+1)
+// }
+// console.log(fn(1))
 
-var h = []
-var p = []
+// var h = []
+// var p = []
 
 
 function dosomething(position) {
