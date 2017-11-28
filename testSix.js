@@ -35,70 +35,63 @@
 // dosomething(1)
 
 
-// var a = []
-// var h = []
-// function choose(n, m) {
+var a = []
+var h = []
+function choose(n, m) {
+
+    if (m === 0) {
+        console.log(h)
+        contorller({ h: h})
+        return
+    }
+    for (var i = 0; i < n; i++) {
+        if (a[i] !== 1 && m < 4) {
+            a[i] = 1
+            h[m - 1] = i + 1
+            choose(n, m - 1)
+            a[i] = 0
+        }
+    }
+}
+function contorller(opts) {
+    var p = opts.h
+    // for (var k = 0; k < p.length; k++) {//改变数组对象
+    //     for (var j = 0; j < p.length - k - 1; j++) {
+    //         if (p[j] > p[j + 1]) {
+    //             var mdd = p[j + 1]
+    //             p[j + 1] = p[j]
+    //             p[j] = mdd
+    //         }
+    //     }
+    // }
+
+    console.log(p)
+}
+
+choose(4, 2)
+
+
+// function answer(n, m) {
+//     var a = []
+//     var h = []
 //     var temp = []
-//     if( m === 0) {
-//         console.log(h)
-//         return 
-//     }
-//     for(var i = 0; i < n; i++) {
-//         if (a[i] !== 1 && m < 4) {
-//             a[i] = 1
-//             h[m - 1] = i + 1
-//             choose(n ,m - 1)
-//             a[i] = 0
+//     var choose = function(n, m) {
+//         if( m === 0) {
+//             console.log(h)
+//             temp.push(h) 
+//             return 
 //         }
-//     }
-// }
-
-// choose(4, 3)
-
-// for(var i = 0; i < temp.length; i++) {
-//     var arr = temp[i]
-//     for(var j = 0; j < arr.length; j++) {
-//         for(var k = 0; k < arr.length - j - 1; k++) {
-//             if(arr[k] > arr[k + 1]) {
-//                 var mdd = arr[k + 1]
-//                 arr[k + 1] = arr[k]
-//                 arr[k] = mdd
+//         for(var i = 0; i < n; i++) {
+//             if (a[i] !== 1 && m < 4) {
+//                 a[i] = 1
+//                 h[m - 1] = i + 1
+//                 choose(n ,m - 1)
+//                 a[i] = 0
 //             }
 //         }
 //     }
-// }
+//     choose(n ,m)
 
-function answer(n, m) {
-    var a = []
-    var h = []
-    var temp = []
-    var choose = function(n, m) {
-        if( m === 0) {
-            temp.push(h) 
-            return 
-        }
-        for(var i = 0; i < n; i++) {
-            if (a[i] !== 1 && m < 4) {
-                a[i] = 1
-                h[m - 1] = i + 1
-                choose(n ,m - 1)
-                a[i] = 0
-            }
-        }
-    }
-    choose(n ,m)
-    for(var i = 0; i < temp.length; i++) {
-        var arr = temp[i]
-        for(var j = 0; j < arr.length; j++) {
-            for(var k = 0; k < arr.length - j - 1; k++) {
-                if(arr[k] > arr[k + 1]) {
-                    var mdd = arr[k + 1]
-                    arr[k + 1] = arr[k]
-                    arr[k] = mdd
-                }
-            }
-        }
-    }
-    return temp
-}
-console.log(answer(4, 3))
+//     return temp
+// }
+// console.log(answer(4, 3))
