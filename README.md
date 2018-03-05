@@ -93,9 +93,54 @@ $.getJSON('/assets/data/diamond.json', function(data) {
   chart.render(); // 图表渲染
 });
 ```
-```
 ![](https://github.com/wenyuanzhuo/g2/raw/master/WX20180305-115818@2x.png)
+#### 5.图表事件、交互
+![](https://github.com/wenyuanzhuo/g2/raw/master/event.png)
+- chart.on('eventType', ev => {}); // 绑定事件
+- chart.off('eventType', ev => {}); // 移除事件
+- chart.on('tooltip:show', ev => {}); // tooltip 展示
+- chart.on('tooltip:hide', ev => {}); // tooltip 隐藏
+- chart.on('tooltip:change', ev => {}); // tooltip 内容发生变化的时候
+- chart.on('point:click', ev => {});
+#### 6.图表交互
+- active激活
+- select选中
 ```
-### 二、api的使用 性能（渲染和重绘）与老版本比较
+geom.active(false); // 关闭默认响应
+geom.active(true); // 开启默认响应
 
+geom.select([true,] {
+  mode: 'single' || 'multiple', // 选中模式，单选、多选
+  style: {}, // 选中后 shape 的样式
+  cancelable: true | false, // 选中之后是否允许取消选中，默认允许取消选中
+  animate: true | false // 选中是否执行动画，默认执行动画
+});
+```
+
+### 二、api的使用 性能（渲染和重绘）与老版本比较,以及与其他可视化工具的对比
+![](https://github.com/wenyuanzhuo/g2/raw/master/data.png)
+> 1.数据流：加载数据->对数据分组->保存原始数 ->数据数值化->归一化操作* ->计算绘制点->映射图形属性->渲染
+
+> 2.Antv3.0 通过合并 Canvas 图层、数据处理抽离、不销毁实例实现重绘(重绘时间大大降低的原因)等措施，大幅度提升了图表的渲染性能，chart的任意元素都可以捕获鼠标和触摸时间，以及监听事件，实现多表交互。
+
+> 3.对比
+
+>> antv g2 ————灵活的图形语法能力，抽离数据处理模块,使得chart更加注重高交互，数据行为解耦，维护成本降低
+>>> 单独抽离数据处理模块 ———— DataSet(数据连接， 数据处理， 状态量管理)
+
+
+
+>> Echarts (canvas) ————拖拽从计算， 动态图表类型切换(折线，柱状),
+>>> 4.0
+
+>>> 支持千万级量级数据 
+
+>>> 新增的SVG渲染方式，在内存占用方面有很好的表现，以折线图、柱状图、饼图为例，SVG渲染占用的内存是Canvas渲染的十分之一 所以移动端现在可以更好的支持渲染 
+
+>>> 支持PPT中使用Echarts
+
+
+>> highchart (svg) ————个人觉得好看比Echart,配置更加灵活 但是文档翻译不全，tm企业用还要买版权
+
+>> D3.js ————自由度最高，大量的数据处理、布局算法和计算图形的工具方法，但是api太过底层复用性很低，开发成本过大
 ### 三、结合react使用 
