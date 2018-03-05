@@ -35,7 +35,7 @@ chart.tooltip(true, {
   <ul class="g2-tooltip-list"></ul>
 </div>
 ```
-#### 辅助元素 GUIDE
+#### 4.辅助元素 GUIDE
 - line：辅助线（可带文本），例如表示平均值或者预期分布的直线；
 - image：辅助图片，在图表上添加辅助图片；
 - text：辅助文本，指定位置添加文本说明；
@@ -62,6 +62,39 @@ chart.guide().line({
     offsetY: {number} // y 方向的偏移量
   } // 文本配置
 });
+```
+```
+const DataView = DataSet.DataView;
+$.getJSON('/assets/data/diamond.json', function(data) {
+  const dv = (new DataView()).source(data);
+  const caratAvg = dv.mean('carat'); // 计算克拉数均值
+  const priceAvg = dv.mean('price'); // 计算价格均值
+  const chart = new G2.Chart({
+    container: 'c5',
+    forceFit: true,
+    height: 450
+  });
+  chart.source(data);
+  chart.point().position('carat*price');
+  // 坐标点
+  const point = [ 3.5, 12000 ];
+  //html字符串
+  const tooltipHtml = "<div style='border: 2px solid #0f8de8;width: 50px;height: 26px;color:         #0f8de8;position: relative;'>" +
+      "<span style='color:#63c6c2;font-size:15px'>异常值</span>" +
+      "<div style='width: 0;height: 0;border-bottom: 8px solid #0f8de8;border-right:10px solid       transparent;position: absolute;top: 16px;left: 46px;'></div>" +
+      "</div>";
+  chart.guide().html({
+    position: point, 
+    html: tooltipHtml, 
+    alignX: 'right',
+    alignY: 'bottom',
+    offsetX: 10
+  });
+  chart.render(); // 图表渲染
+});
+```
+```
+![](https://github.com/wenyuanzhuo/g2/raw/master/WX20180305-115818@2x.png)
 ```
 ### 二、api的使用 性能（渲染和重绘）与老版本比较
 
